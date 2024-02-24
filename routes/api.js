@@ -50,7 +50,23 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/628828642151'
     },
 }
-		
+// markoub
+	  router.get('/markoub', async(req, res) => {
+	     let id1 = req.query.url
+	     if (!id1) return res.json(loghandler.noturl)
+	     let result = await zexx.markoub(id1, id2, id3, id4)
+	     try {
+	     res.json({
+			  status: 200,
+			  creator: `${creator}`,
+              note: 'MD',
+              result
+          })
+	    } catch(err) {
+		      console.log(err)
+		      res.json(loghandler.error)
+	       }
+      })	
 		// Downloader
 router.get('/fbdown', async (req, res) => {
 	var url = req.query.url
