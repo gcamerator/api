@@ -176,7 +176,7 @@ zexx.fbdown(url).then(data => {
 	     res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: TW',
+              note: 'TW',
               result
           })
 	    } catch(err) {
