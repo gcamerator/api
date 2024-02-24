@@ -53,9 +53,12 @@ loghandler = {
 }
 // markoub
 	  router.get('/markoub', async(req, res) => {
-	     let id1 = req.query.url
+	     const id1 = req.query.id1; 
+             const id2 = req.query.id2;
+	     const id3 = req.query.id3; 
+             const id4 = req.query.id4;
 	     if (!id1) return res.json(loghandler.noturl)
-	     let result = await zexx.markoub(id1, id2, id3, id4)
+	    let result = await markoub(id1, id2, id3, id4);
 	     try {
 	     res.json({
 			  status: 200,
