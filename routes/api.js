@@ -12,7 +12,7 @@ const { toanime, tozombie } = require("../lib/turnimg.js")
 //const sanz = require("../lib/sanzyy-api")
 const sanzyy = require('sanzyy-api')
 const zexx = require("../lib/listdl")
-let mmk = ["Zexxa","Kira-Master","ZexxaDevID"]
+let mmk = ["MidSoune","MidSoune","MidSoune"]
 let creator = mmk[Math.floor(Math.random() * mmk.length)]
 let axios = require('axios')
 let fs = require('fs')
@@ -77,7 +77,7 @@ zexx.fbdown(url).then(data => {
 		  res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'Jangan Di Tembak Bang',
+              note: 'TT',
               result
           })
 	   } catch(err) {
@@ -127,7 +127,7 @@ zexx.fbdown(url).then(data => {
 	     res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'Jangan Di Tembak Bang',
+              note: 'MD',
               result
           })
 	    } catch(err) {
@@ -176,7 +176,7 @@ zexx.fbdown(url).then(data => {
 	     res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'Jangan Di Tembak Bang',
+              note: TW',
               result
           })
 	    } catch(err) {
@@ -192,7 +192,7 @@ zexx.fbdown(url).then(data => {
 	     res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'Jangan Di Tembak Bang',
+              note: 'PT',
               result
           })
 	    } catch(err) {
@@ -209,7 +209,7 @@ zexx.fbdown(url).then(data => {
 	      res.json({ 
 		       status: 200,
 		       creator: `${creator}`,
-               note: 'Jangan Di Tembak Bang',
+               note: ':)',
                result 
            })
       })
@@ -221,7 +221,7 @@ zexx.fbdown(url).then(data => {
 	      res.json({ 
 		       status: 200,
 		       creator: `${creator}`,
-               note: 'Jangan Di Tembak Bang',
+               note: ':)',
                result 
            })
         .catch(e => {
@@ -237,7 +237,7 @@ zexx.fbdown(url).then(data => {
              res.json({
                   status: 200,
                   creator: `${creator}`,
-                  note: 'Jangan Di Tembak Bang',
+                  note: ':)',
                   result
              })
             .catch(e => {
@@ -251,7 +251,7 @@ zexx.fbdown(url).then(data => {
 		    res.json({
                  status: 200,
                  creator: `${creator}`,
-                 note: 'Jangan Di Tembak Bang',
+                 note: ':)',
                  result
             })
        })
@@ -261,7 +261,7 @@ zexx.fbdown(url).then(data => {
              res.json({
                   status: 200,
                   creator: `${creator}`,
-                  note: 'Jangan Di Tembak Bang',
+                  note: ':)',
                   result
               })
          })
