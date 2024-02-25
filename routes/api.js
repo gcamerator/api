@@ -63,7 +63,7 @@ router.get('/markoub', async (req, res) => {
   const city1 = req.query.city1;
   const city2 = req.query.city2;
   const seats = req.query.seats || 1;
-  const date = req.query.date || getDate();
+  const date = getDate() + req.query.date || # ;
   
   try {
     const result = await markoub(city1, city2, seats, date);
@@ -82,9 +82,7 @@ router.get('/markoub', async (req, res) => {
 function getDate() {
   const today = new Date();
   const month = (today.getMonth() + 1).toString().padStart(2, "0");
-  const day = today.getDate().toString().padStart(2, "0");
-
-  return `${today.getFullYear()}-${month}-${day}`;
+  return `${today.getFullYear()}-${month}-`;
 }
 		// Downloader
 router.get('/fbdown', async (req, res) => {
