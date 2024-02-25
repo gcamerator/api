@@ -60,36 +60,31 @@ loghandler = {
 // markoub
 
 router.get('/markoub', async (req, res) => {
-const city1 = req.query.city1;
+  const city1 = req.query.city1;
   const city2 = req.query.city2;
   const seats = req.query.seats || 1;
   const date = req.query.date || getDate();
-    const today = new Date();
-    const my = today.getFullYear()-(today.getMonth() + 1).toString().padStart(2, "0");
-    const day = today.getDate().toString().padStart(2, "0"); 
-    if (!seats) {
-      seats = 1; }
-    if (!date) {
-      date = day;  }
-    let result = await markoub(city1, city2, seats, date);
-	      try {
-		  res.json({
-			  status: 200,
-			  creator: `${creator}`,
-              note: 'مركوب',
-              result
-          })
-	   } catch(err) {
-		    console.log(err)
-		    res.json(loghandler.error)
-	     }
+  
+  try {
+    const result = await markoub(city1, city2, seats, date);
+    res.json({
+      status: 200,
+      creator: `${creator}`,
+      note: 'مركوب',
+      result
     });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.error);
+  }
+});
+
 function getDate() {
   const today = new Date();
   const month = (today.getMonth() + 1).toString().padStart(2, "0");
   const day = today.getDate().toString().padStart(2, "0");
 
-  return `${today.getFullYear()}-${month}-${day}`; 
+  return `${today.getFullYear()}-${month}-${day}`;
 }
 		// Downloader
 router.get('/fbdown', async (req, res) => {
