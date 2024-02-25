@@ -58,7 +58,6 @@ loghandler = {
     },
 }
 // markoub
-const router = require('express').Router();
 
 router.get('/markoub', async (req, res) => {
 
