@@ -64,8 +64,13 @@ router.get('/markoub', async (req, res) => {
   const city1 = req.query.city1;
   const city2 = req.query.city2;
   const seats = req.query.seats || 1;
-const date = getDate() + req.query.date || #;
+  let date;
 
+if(req.query.date) {
+  date = getDate() + req.query.date; 
+} else {
+  date = '#';
+}
   try {
     const result = await markoub(city1, city2, seats, date);
     
