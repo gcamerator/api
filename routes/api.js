@@ -77,7 +77,7 @@ if(req.query.date) {
     res.json({
       status: 200, 
       creator: `${creator}`,
-      note: url,
+      url,
       result 
     });
 
