@@ -61,30 +61,21 @@ loghandler = {
 
 router.get('/markoub', async (req, res) => {
 
-  const date = req.query.date;
+ const date = req.query.date;
 
-
-  const resultPromise = markoub(date);
-
-  try {
-
-    const result = await resultPromise;
-
-    res.json({
-      status: 200,
-      creator: `${creator}`,
-      note: 'Markoub - مركوب',
-      result  
-    });
-
-  } catch (err) {
-
-    console.log(err);
-    res.json(loghandler.error);
-
-  }
-
-});
+    let result = await markoub(date);
+	      try {
+		  res.json({
+			  status: 200,
+			  creator: `${creator}`,
+              note: 'مركوب',
+              result
+          })
+	   } catch(err) {
+		    console.log(err)
+		    res.json(loghandler.error)
+	     }
+    })
 
 		// Downloader
 router.get('/fbdown', async (req, res) => {
