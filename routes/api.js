@@ -53,17 +53,17 @@ loghandler = {
 }
 // markoub
 	  router.get('/markoub', async(req, res) => {
-	     const id1 = req.query.id1; 
-             const id2 = req.query.id2;
-	     const id3 = req.query.id3; 
-             const id4 = req.query.id4;
+	     const city1 = req.query.city1; 
+             const city2 = req.query.city2;
+	     const seats = req.query.seats; 
+             const date = req.query.date;
 	     if (!id1) return res.json(loghandler.noturl)
-	    let result = await markoub(id1, id2, id3, id4);
+	    let result = await markoub(city1, city2, seats, date);
 	     try {
 	     res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'MD',
+              note: 'Markoub - مركوب',
               result
           })
 	    } catch(err) {
