@@ -60,23 +60,37 @@ loghandler = {
 // markoub
 
 router.get('/markoub', async (req, res) => {
+
   const city1 = req.query.city1;
   const city2 = req.query.city2;
   const seats = req.query.seats || 1;
-  const date = getDate() + req.query.date || # ;
-  
+
+  // Get current date in YYYY-MM- format
+const today = getDate();
+
+let date; 
+
+if(req.query.date) {
+  date += today + req.query.date;
+} else {
+  date += '#';
+}
+
   try {
     const result = await markoub(city1, city2, seats, date);
+    
     res.json({
-      status: 200,
+      status: 200, 
       creator: `${creator}`,
       note: 'مركوب',
-      result
+      result 
     });
+
   } catch(err) {
     console.log(err);
-    res.json(loghandler.error);
+    res.status(500).send('Error getting data'); 
   }
+
 });
 
 function getDate() {
