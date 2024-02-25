@@ -77,13 +77,13 @@ if(req.query.date) {
     res.json({
       status: 200, 
       creator: `${creator}`,
-      note: 'مركوب',
+      note: url,
       result 
     });
 
   } catch(err) {
     console.log(err);
-    res.status(500).send('Error getting data'); 
+    res.json(loghandler.err)
   }
 
 });
