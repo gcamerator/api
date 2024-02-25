@@ -93,7 +93,7 @@ function getDate() {
   return `${today.getFullYear()}-${month}-`;
 }
 // hespress
-router.get('/hespress', async (res) => {
+router.get('/hespress', async (req, res) => {
   try {
     const result = await hespress();
      res.json({
