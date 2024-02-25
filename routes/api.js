@@ -39,6 +39,12 @@ loghandler = {
         code: 406,
         message: 'Masukan URL'
     },
+	    qima: {
+        status: false,
+        creator: `${creator}`,
+        code: 406,
+        message: 'دخل المعلومات المطلوبة'
+    },
     notquery: {
         status: false,
         creator: `${creator}`,
@@ -57,7 +63,7 @@ loghandler = {
              const city2 = req.query.city2;
 	     const seats = req.query.seats; 
              const date = req.query.date;
-	     if (!id1) return res.json(loghandler.noturl)
+	     if (!city1 || !city2) return res.json(loghandler.qima)
 	    let result = await markoub(city1, city2, seats, date);
 	     try {
 	     res.json({
