@@ -73,8 +73,8 @@ if(req.query.date) {
 }
   try {
     const result = await markoub(city1, city2, seats, date);
-    
-    res.json({
+    console.log(result)
+     res.json({
       status: 200, 
       creator: `${creator}`,
       result 
