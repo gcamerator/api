@@ -94,8 +94,9 @@ function getDate() {
 }
 // hespress
 router.get('/hespress', async (req, res) => {
+	const all = req.query.all;
   try {
-    const result = await hespress();
+    const result = await hespress(all);
      res.json({
       status: 200, 
       creator: `${creator}`,
