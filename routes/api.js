@@ -67,11 +67,9 @@ router.get('/markoub', async (req, res) => {
 
   // Get current date in YYYY-MM- format
 const today = getDate();
-
-let date; 
-
+let date = today; 
 if(req.query.date) {
-  date += today + req.query.date;
+  date += req.query.date;
 } else {
   date += '#';
 }
