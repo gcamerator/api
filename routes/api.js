@@ -60,10 +60,12 @@ loghandler = {
 // markoub
 
 router.get('/markoub', async (req, res) => {
-
+ const city1 = req.query.city1;
+const city2 = req.query.city2;
+const seats = req.query.seats;
  const date = req.query.date;
 
-    let result = await markoub(date);
+    let result = await markoub(city1, city2, seats, date);
 	      try {
 		  res.json({
 			  status: 200,
