@@ -64,7 +64,6 @@ router.get('/markoub', async (req, res) => {
   const city2 = req.query.city2;
   const seats = req.query.seats || 1;
   let date;
-
 if(req.query.date) {
   date = getDate() + req.query.date; 
 } else {
@@ -78,14 +77,11 @@ if(req.query.date) {
       creator: `${creator}`,
       result 
     });
-
   } catch(err) {
     console.log(err);
     res.json(loghandler.err)
   }
-
 });
-
 function getDate() {
   const today = new Date();
   const month = (today.getMonth() + 1).toString().padStart(2, "0");
@@ -93,9 +89,9 @@ function getDate() {
 }
 // hespress
 router.get('/hespress', async (req, res) => {
-	const all = req.query.all;
+//	const all = req.query.all;
   try {
-    const result = await hespress(all);
+    const result = await hespress();
      res.json({
       status: 200, 
       creator: `${creator}`,
