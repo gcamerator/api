@@ -60,7 +60,6 @@ loghandler = {
 // markoub
 
 router.get('/markoub', async (req, res) => {
-
   const city1 = req.query.city1;
   const city2 = req.query.city2;
   const seats = req.query.seats || 1;
@@ -107,7 +106,21 @@ router.get('/hespress', async (req, res) => {
     res.json(loghandler.err)
   }
 });
-
+// hespress
+router.get('/hesport', async (req, res) => {
+//	const all = req.query.all;
+  try {
+    const result = await hesport();
+     res.json({
+      status: 200, 
+      creator: `${creator}`,
+      result 
+    });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.err)
+  }
+});
 // Downloader
 router.get('/fbdown', async (req, res) => {
 	var url = req.query.url
