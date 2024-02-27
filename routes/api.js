@@ -12,7 +12,7 @@ const { toanime, tozombie } = require("../lib/turnimg.js")
 //const sanz = require("../lib/sanzyy-api")
 const sanzyy = require('sanzyy-api')
 const zexx = require("../lib/listdl")
-let mmk = ["MidSoune","MidSoune","MidSoune"]
+let mmk = ["MidSoune"]
 let creator = mmk[Math.floor(Math.random() * mmk.length)]
 let axios = require('axios')
 let fs = require('fs')
@@ -103,7 +103,7 @@ router.get('/hespress', async (req, res) => {
     res.json(loghandler.err)
   }
 });
-// hespress
+// hesport
 router.get('/hesport', async (req, res) => {
 //	const all = req.query.all;
   try {
