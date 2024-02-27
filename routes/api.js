@@ -23,7 +23,7 @@ let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let nana = new NanaAPI()
 let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index') 
-let {markoub, hespress} = require('../lib/api/apidl')
+let {markoub, hespress, hesport} = require('../lib/api/apidl')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -39,7 +39,7 @@ loghandler = {
         code: 406,
         message: 'Masukan URL'
     },
-	    qima: {
+   qima: {
         status: false,
         creator: `${creator}`,
         code: 406,
@@ -64,6 +64,7 @@ router.get('/markoub', async (req, res) => {
   const city2 = req.query.city2;
   const seats = req.query.seats || 1;
   let date;
+	if (!city1 || !city2 ) return res.json(loghandler.qima)  
 if(req.query.date) {
   date = getDate() + req.query.date; 
 } else {
