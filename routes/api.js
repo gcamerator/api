@@ -204,7 +204,7 @@ zexx.fbdown(url).then(data => {
      router.get('/mediafire', async(req, res) => {
 	     let url = req.query.url
 	     if (!url) return res.json(loghandler.noturl)
-	     let result = await zexx.mediafireDl(url)
+	     let result = await mediafireDl(url)
 	     try {
 	     res.json({
 			  status: 200,
