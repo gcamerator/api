@@ -23,7 +23,7 @@ let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let nana = new NanaAPI()
 let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index') 
-let {markoub, hespress, hesport, hiba} = require('../lib/api/apidl')
+let {markoub, hespress, hesport, hiba, talamidi} = require('../lib/api/apidl')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -127,6 +127,21 @@ router.get('/hibapress', async (req, res) => {
       status: 2100, 
       creator: `${creator}`,
       result 
+    });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.err)
+  }
+});
+// talamidi
+router.get('/talamidi', async (req, res) => {
+//	const all = req.query.all;
+  try {
+const aa = await talamidi();
+     res.json({
+      status: 200, 
+      creator: `${creator}`,
+      aa 
     });
   } catch(err) {
     console.log(err);
