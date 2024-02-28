@@ -103,6 +103,21 @@ const result = await hesport();
     res.json(loghandler.err)
   }
 });
+// salat
+router.get('/salat', async (req, res) => {
+	const city = req.query.mdina;
+  try {
+const result = await salat(city);
+     res.json({
+      status: 200, 
+      creator: `${creator}`,
+      result 
+    });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.err)
+  }
+});
 // rhespress
 router.get('/rhespress', async (req, res) => {
 	const url = req.query.lien;
