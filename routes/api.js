@@ -23,7 +23,7 @@ let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let nana = new NanaAPI()
 let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index') 
-let {markoub, hespress, hesport, hiba, talamidi} = require('../lib/api/apidl')
+let {markoub, hespress, hiba, talamidi} = require('../lib/api/apidl')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -107,7 +107,7 @@ const result = await hesport();
 router.get('/hesport', async (req, res) => {
 //	const all = req.query.all;
   try {
-    const result = await hesport();
+    const result = await zexx.hesport();
      res.json({
       status: 200, 
       creator: `${creator}`,
