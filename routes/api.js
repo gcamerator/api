@@ -135,7 +135,7 @@ router.get('/hibapress', async (req, res) => {
 });
 // talamidi
 router.get('/talamidi', async (req, res) => {
-//	const all = req.query.all;
+	const q = req.query.drs;
   try {
 const result = await talamidi(q);
      res.json({
