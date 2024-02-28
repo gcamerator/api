@@ -54,7 +54,7 @@ loghandler = {
     error: {
         status: 404,
         creator: `${creator}`,
-        message: 'An internal error occurred. Please report via WhatsApp wa.me/628828642151'
+        message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
 // markoub
@@ -106,6 +106,7 @@ const result = await hesport();
 // rhespress
 router.get('/rhespress', async (req, res) => {
 	const url = req.query.lien;
+	if (!url ) return res.json({ status : false, creator : `${creator}`, message : "[!] أدخل رابط الخبر"})  
   try {
 const result = await rhespress(url);
      res.json({
@@ -151,6 +152,7 @@ router.get('/hibapress', async (req, res) => {
 // talamidi
 router.get('/talamidi', async (req, res) => {
 	const q = req.query.drs;
+	if (!q) return res.json({ status : false, creator : `${creator}`, message : "[!] أدخل إسم الدرس"})  
   try {
 const result = await talamidi(q);
      res.json({
