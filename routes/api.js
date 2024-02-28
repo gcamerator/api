@@ -103,11 +103,11 @@ const result = await hesport();
     res.json(loghandler.err)
   }
 });
-// read hespress
+// rhespress
 router.get('/rhespress', async (req, res) => {
 	const url = req.query.lien;
   try {
-const result = await hesport(url);
+const result = await rhespress(url);
      res.json({
       status: 200, 
       creator: `${creator}`,
