@@ -92,11 +92,11 @@ function getDate() {
 router.get('/hespress', async (req, res) => {
 //	const all = req.query.all;
   try {
-const aa = await hesport();
+const result = await hesport();
      res.json({
       status: 200, 
       creator: `${creator}`,
-      aa 
+      result 
     });
   } catch(err) {
     console.log(err);
@@ -137,11 +137,11 @@ router.get('/hibapress', async (req, res) => {
 router.get('/talamidi', async (req, res) => {
 //	const all = req.query.all;
   try {
-const aa = await talamidi();
+const result = await talamidi(q);
      res.json({
       status: 200, 
       creator: `${creator}`,
-      aa 
+      result 
     });
   } catch(err) {
     console.log(err);
