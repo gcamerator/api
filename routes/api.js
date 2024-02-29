@@ -198,7 +198,7 @@ const result = await talamidi(q);
 // dtalamidi
 router.get('/dtalamidi', async (req, res) => {
 	const url = req.query.url;
-	if (!q) return res.json({ status : false, creator : `${creator}`, message : "[!] أدخل رابط الدرس"})  
+	if (!url) return res.json({ status : false, creator : `${creator}`, message : "[!] أدخل رابط الدرس"})  
   try {
 const result = await dtalamidi(url);
      res.json({
