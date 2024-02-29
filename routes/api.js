@@ -92,7 +92,7 @@ function getDate() {
 router.get('/hespress', async (req, res) => {
 //	const all = req.query.all;
   try {
-const result = await hesport();
+const result = await hespress();
      res.json({
       status: 200, 
       creator: `${creator}`,
@@ -138,7 +138,7 @@ const result = await rhespress(url);
 router.get('/hesport', async (req, res) => {
 //	const all = req.query.all;
   try {
-    const result = await zexx.hesport();
+    const result = await hesport();
      res.json({
       status: 200, 
       creator: `${creator}`,
