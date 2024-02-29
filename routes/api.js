@@ -216,7 +216,7 @@ router.get('/fbdown', async (req, res) => {
 	var url = req.query.url
 	if (!url ) return res.json({ status : false, creator : `${creator}`, message : "[!] masukan parameter url"})  
 zexx.fbdown(url).then(data => {
-	if (!data.Normal_video ) return res.json(loghandler.noturl)
+	if (!data.sd ) return res.json(loghandler.noturl)
 	res.json({
 	status: true,
 	creator: `${creator}`,
