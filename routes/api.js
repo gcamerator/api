@@ -214,20 +214,19 @@ const result = await dtalamidi(url);
 // Downloader
 router.get('/fbdown', async (req, res) => {
 	var url = req.query.url
-	if (!url ) return res.json({ status : false, creator : `${creator}`, message : "[!] masukan parameter url"})  
-zexx.fbdown(url).then(data => {
-	if (!data.sd ) return res.json(loghandler.noturl)
-	res.json({
-	status: true,
-	creator: `${creator}`,
-	result:	data
-	})
-	})
-	 .catch(e => {
-		res.json(loghandler.error)
-})
-})
-
+	if (!url ) return res.json({ status : false, creator : `${creator}`, message : "[!] أدخل رابط الفيديو url"})  
+  try {
+const result = await fbdown(url);
+     res.json({
+      status: 200, 
+      creator: `${creator}`,
+      result 
+    });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.err)
+  }
+});
 		
     router.get('/tiktok', async(req, res) => {
 	      let url = req.query.url
