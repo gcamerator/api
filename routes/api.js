@@ -105,9 +105,9 @@ const result = await hesport();
 });
 // salat
 router.get('/salat', async (req, res) => {
-	const city = req.query.mdina;
+const city = req.query.mdina;
   try {
-const result = await salat(city);
+const result = await zexx.salat(city);
      res.json({
       status: 200, 
       creator: `${creator}`,
