@@ -155,7 +155,7 @@ router.get('/hibapress', async (req, res) => {
   try {
     const result = await hiba();
      res.json({
-      status: 2100, 
+      status: 200, 
       creator: `${creator}`,
       result 
     });
@@ -166,11 +166,11 @@ router.get('/hibapress', async (req, res) => {
 });
 // rhiba
 router.get('/rhibapress', async (req, res) => {
-//	const url = req.query.lien;
+	const url = req.query.lien;
   try {
-    const result = await hiba(url);
+    const result = await rhiba(url);
      res.json({
-      status: 2100, 
+      status: 200, 
       creator: `${creator}`,
       result 
     });
