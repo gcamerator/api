@@ -292,22 +292,17 @@ const result = await fbdown(url);
     router.get('/igdl', async(req, res) => {
 	     let url = req.query.url
 	     if (!url) return res.json(loghandler.noturl)
-	     try {
-	     fetch('https://api.akuari.my.id/downloader/igdl2?link=' + url)
-		.then(response => response.json())
-		.then(async (data) => { 
-		var result = data.respon
+	  const result = await zexx.igdl(url)
 		res.json({
 			status: 200,
 	        creator: `${creator}`,
 			result: result
 	    })
-	})
 	    } catch(err) {
 		      console.log(err)
 		      res.json(loghandler.error)
 	       }
-      })
+      )
      router.get('/mediafire', async(req, res) => {
 	     let url = req.query.url
 	     if (!url) return res.json(loghandler.noturl)
