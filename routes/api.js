@@ -72,6 +72,7 @@ router.get('/cook', async (req, res) => {
     res.json(loghandler.err)
   }
 });
+
 // truecaller
 router.get('/truecaller', async (req, res) => {
   const num = req.query.num;
@@ -289,20 +290,24 @@ const result = await fbdown(url);
 	    })
 	})
 })
-    router.get('/igdl', async(req, res) => {
-	     let url = req.query.url
-	     if (!url) return res.json(loghandler.noturl)
-	  const result = await zexx.igdl(url)
-		res.json({
-			status: 200,
-	        creator: `${creator}`,
-			result: result
-	    })
-	    } catch(err) {
-		      console.log(err)
-		      res.json(loghandler.error)
-	       }
-      )
+router.get('/igdl', async (req, res) => {
+  try {
+    let url = req.query.url;
+    if (!url) return res.json(loghandler.noturl);
+  
+    const result = await zexx.igdl(url);
+  
+    res.json({
+      status: 200,
+      creator: `${creator}`,
+      result: result
+    });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.error);
+  }
+});
+
      router.get('/mediafire', async(req, res) => {
 	     let url = req.query.url
 	     if (!url) return res.json(loghandler.noturl)
