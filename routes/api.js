@@ -61,7 +61,7 @@ loghandler = {
 router.get('/cook', async (req, res) => {
   const q = req.query.q;
   try {
-    const result = await zexx.cook(q):
+    const result = await cook(q);
      res.json({
       status: 200, 
       creator: `${creator}`,
