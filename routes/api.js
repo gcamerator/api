@@ -296,7 +296,7 @@ router.get('/igdl', async (req, res) => {
     if (!url) return res.json(loghandler.noturl);
   
     const result = await zexx.igdl(url);
-  
+
     res.json({
       status: 200,
       creator: `${creator}`,
@@ -306,7 +306,6 @@ router.get('/igdl', async (req, res) => {
 	    console.log(err)
       res.json(loghandler.error)
 	 }
-      })
 });
 
      router.get('/mediafire', async(req, res) => {
