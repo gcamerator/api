@@ -61,26 +61,15 @@ loghandler = {
 router.get('/cook', async (req, res) => {
   const q = req.query.q;
   try {
-    const response = await fetch(`http://cookpad.com/ma/search/${q}`);
-    const html = await response.text();
-    const $ = cheerio.load(html);
-    const result = [];
-    $('div.relative ul li.block-link.card.border-cookpad-gray-400').each((index, element) => {
-      const card = {
-        name: $(element).find('.flex.justify-between h2').text().trim(),
-        dsc: $(element).find('.mb-sm div div.clamp-2').text().trim(),
-        link: 'http://cookpad.com' + $(element).find('.flex.justify-between h2 a').attr('href')
-      };
-      result.push(card);
-    });
+    const result = await zexx.cook(q):
      res.json({
       status: 200, 
       creator: `${creator}`,
       result 
     });
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.err)
   }
 });
 // truecaller
