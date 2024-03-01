@@ -107,7 +107,7 @@ const result = await hespress();
 router.get('/salat', async (req, res) => {
 const city = req.query.mdina;
   try {
-const result = await zexx.salat(city);
+const result = await salat(city);
      res.json({
       status: 200, 
       creator: `${creator}`,
