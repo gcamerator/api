@@ -286,7 +286,7 @@ const result = await fbdown(url);
 		res.json({
 			status: 200,
 	        creator: `${creator}`,
-			result: result
+			result
 	    })
 	})
 })
@@ -300,7 +300,7 @@ router.get('/igdl', async (req, res) => {
     res.json({
       status: 200,
       creator: `${creator}`,
-      result: result
+      result
     });
   } catch(err) {
     console.log(err);
@@ -363,9 +363,8 @@ router.get('/igdl', async (req, res) => {
 	     let result = await zexx.twitter(url)
 	     try {
 	     res.json({
-			  status: 200,
-			  creator: `${creator}`,
-              note: 'TW',
+               status: 200,
+              creator: `${creator}`,
               result
           })
 	    } catch(err) {
@@ -381,7 +380,6 @@ router.get('/igdl', async (req, res) => {
 	     res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'PT',
               result
           })
 	    } catch(err) {
