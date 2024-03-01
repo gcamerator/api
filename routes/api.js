@@ -57,8 +57,25 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
+// truecaller
+router.get('/truecaller', async (req, res) => {
+  const num = req.query.num;
+  const id = req.query.id;
+  let date;
+  try {
+    const result = await zexx.truecaller(num, id);
+    console.log(result)
+     res.json({
+      status: 200, 
+      creator: `${creator}`,
+      result 
+    });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.err)
+  }
+});
 // markoub
-
 router.get('/markoub', async (req, res) => {
   const city1 = req.query.city1;
   const city2 = req.query.city2;
