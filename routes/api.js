@@ -58,7 +58,7 @@ loghandler = {
     },
 }
 // cook
-app.get('/cook', async (req, res) => {
+router.get('/cook', async (req, res) => {
   const q = req.query.q;
   try {
     const response = await fetch(`http://cookpad.com/ma/search/${q}`);
