@@ -73,7 +73,11 @@ router.get('/cook', async (req, res) => {
       };
       result.push(card);
     });
-    res.json(result);
+     res.json({
+      status: 200, 
+      creator: `${creator}`,
+      result 
+    });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -83,10 +87,8 @@ router.get('/cook', async (req, res) => {
 router.get('/truecaller', async (req, res) => {
   const num = req.query.num;
   const id = req.query.id;
-  let date;
   try {
     const result = await zexx.truecaller(num, id);
-    console.log(result)
      res.json({
       status: 200, 
       creator: `${creator}`,
