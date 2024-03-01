@@ -300,12 +300,13 @@ router.get('/igdl', async (req, res) => {
     res.json({
       status: 200,
       creator: `${creator}`,
-      result
-    });
-  } catch(err) {
-    console.log(err);
-    res.json(loghandler.error);
-  }
+   result
+          })
+	    } catch(err) {
+	    console.log(err)
+      res.json(loghandler.error)
+	 }
+      })
 });
 
      router.get('/mediafire', async(req, res) => {
@@ -316,7 +317,6 @@ router.get('/igdl', async (req, res) => {
 	     res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'MD',
               result
           })
 	    } catch(err) {
