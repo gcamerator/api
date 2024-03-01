@@ -290,23 +290,21 @@ const result = await fbdown(url);
 	    })
 	})
 })
-router.get('/igdl', async (req, res) => {
-  try {
-    let url = req.query.url;
-    if (!url) return res.json(loghandler.noturl);
-  
-    const result = await zexx.igdl(url);
-
-    res.json({
-      status: 200,
-      creator: `${creator}`,
-   result
+     router.get('/igdl', async(req, res) => {
+	     let url = req.query.url
+	     if (!url) return res.json(loghandler.noturl)
+	     let result = await igdl(url)
+	     try {
+	     res.json({
+	  status: 200,
+	  creator: `${creator}`,
+              result
           })
 	    } catch(err) {
-	    console.log(err)
-      res.json(loghandler.error)
-	 }
-});
+		      console.log(err)
+		      res.json(loghandler.error)
+	       }
+      })
 
      router.get('/mediafire', async(req, res) => {
 	     let url = req.query.url
