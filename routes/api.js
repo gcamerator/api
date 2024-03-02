@@ -267,7 +267,6 @@ const result = await fbdown(url);
 		  res.json({
 			  status: 200,
 			  creator: `${creator}`,
-              note: 'TT',
               result
           })
 	   } catch(err) {
