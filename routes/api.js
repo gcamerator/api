@@ -326,7 +326,7 @@ const result = await fbdown(url);
 	     var mp3 = await ytMp3(url)
 	var mp4 = await ytMp4(url)
 	if (!mp4 || !mp3) return res.json(loghandler.noturl)
-	limitapikey(req.query.apikey)
+//	limitapikey(req.query.apikey)
 		res.json({
 			status: 200,
 			creator: `${creator}`,
