@@ -339,7 +339,6 @@ const result = await fbdown(url);
 		        video: mp4.res,
 			audio: mp3.result,
 			}
-		 }
 	   })
 	    } catch(err) {
 		      console.log(err)
