@@ -324,7 +324,7 @@ const result = await fbdown(url);
 	     let url = req.query.url
 	     try {
 	     var mp3 = await ytMp3(url)
-	var mp4 = await ytMp4(url)
+	     var mp4 = await ytMp4(url)
 	if (!mp4 || !mp3) return res.json(loghandler.noturl)
 //	limitapikey(req.query.apikey)
 		res.json({
@@ -336,10 +336,8 @@ const result = await fbdown(url);
 			thum: mp4.thumb,
 			channel: mp4.channel,
 			uploadDate: mp4.uploadDate,
-			mp4:{
-				result: mp4.result,
-				quality: mp4.quality
-			},
+			mp4: 
+			       mp4,
 			mp3:{
 				result: mp3.result,
 			}
