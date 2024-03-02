@@ -334,17 +334,14 @@ const result = await fbdown(url);
 			title: mp4.title,
 			desc: mp4.desc,
 			thum: mp4.thumb,
-			view: mp4.views,
 			channel: mp4.channel,
 			uploadDate: mp4.uploadDate,
 			mp4:{
 				result: mp4.result,
-				size: mp4.size,
 				quality: mp4.quality
 			},
 			mp3:{
 				result: mp3.result,
-				size: mp3.size
 			}
 		 }
 	   })
