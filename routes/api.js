@@ -23,7 +23,7 @@ let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let nana = new NanaAPI()
 let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index') 
-let {markoub, hespress, hiba, rhiba, fbdown, dtalamidi, talamidi, rhespress, salat, igdl} = require('../lib/api/apidl')
+let {markoub, hespress, hiba, rhiba, fbdown, dtalamidi, talamidi, rhespress, salat, igdl, musically} = require('../lib/api/apidl')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -262,7 +262,7 @@ const result = await fbdown(url);
     router.get('/tiktok', async(req, res) => {
 	      let url = req.query.url
 	      if (!url) return res.json(loghandler.noturl)
-	      let result = await zexx.musically(url)
+	      let result = await musically(url)
 	      try {
 		  res.json({
 			  status: 200,
