@@ -6,6 +6,7 @@ let zahirr = db.get("zahirr");
 } catch (e) {
 	console.log('')  
 }
+const { kora } = require('../lib/api/kora')
 const { ytMp4, ytMp3 } = require('../lib/y2mate')
 const { openai } = require("../lib/openai.js")
 const { toanime, tozombie } = require("../lib/turnimg.js")
