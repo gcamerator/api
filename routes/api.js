@@ -330,7 +330,6 @@ const result = await fbdown(url);
 			status: 200,
 			creator: `${creator}`,
 			result
-			}
 	   })
 	    } catch(err) {
 		      console.log(err)
