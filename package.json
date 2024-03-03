@@ -22,6 +22,7 @@
     "url": "https://github.com/ultimareall/api-velgrynd/issues"
   },
   "dependencies": {
+    "yt-search": "^2.10.4",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.10",
