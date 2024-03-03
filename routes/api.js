@@ -57,6 +57,25 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
+// youtube
+   router.get('/youtube', async(req, res) => {
+	     let url = req.query.url
+	     try {
+	     var mp4 = await ytMp4(url)
+             var mp3 = await ytMp3(url)
+	if (!mp4 || !mp3) return res.json(loghandler.noturl)
+//	limitapikey(req.query.apikey)
+		res.json({
+			status: 200,
+			creator: `${creator}`,
+			video: mp4,
+			audio: mp3
+	   })
+	    } catch(err) {
+		      console.log(err)
+		      res.json(loghandler.error)
+	       }
+     })
 // cook
 router.get('/cook', async (req, res) => {
   const q = req.query.q;
@@ -320,22 +339,7 @@ const result = await fbdown(url);
 		      res.json(loghandler.error)
 	       }
       })
-     router.get('/youtube', async(req, res) => {
-	     let url = req.query.url
-	     try {
-	     var result = await ytMp4(url)
-	if (!result) return res.json(loghandler.noturl)
-//	limitapikey(req.query.apikey)
-		res.json({
-			status: 200,
-			creator: `${creator}`,
-			result
-	   })
-	    } catch(err) {
-		      console.log(err)
-		      res.json(loghandler.error)
-	       }
-     })
+
      router.get('/twitter', async(req, res) => {
 	     let url = req.query.url
 	     if (!url) return res.json(loghandler.noturl)
