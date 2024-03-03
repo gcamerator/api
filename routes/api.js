@@ -22,7 +22,7 @@ let hxz = require('hxz-api')
 let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let nana = new NanaAPI()
-let { tiktok, pinterest, mediafireDl, doujindesu, pinterestdl } = require('../lib/index') 
+let { tiktok, pinterest, mediafireDl, pinterestdl } = require('../lib/index') 
 let {markoub, hespress, hiba, rhiba, fbdown, dtalamidi, talamidi, rhespress, salat, igdl, musically} = require('../lib/api/apidl')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
@@ -430,16 +430,6 @@ const result = await fbdown(url);
                  result
             })
        })
-       router.get('/doujindesuSearch', async (req, res) => {
-             let query = req.query.query
-             let result = await doujindesu(query)
-             res.json({
-                  status: 200,
-                  creator: `${creator}`,
-                  note: ':)',
-                  result
-              })
-         })
          
          // Random Image
           router.get('/randomimage/waifu', async (req, res, next) => {
