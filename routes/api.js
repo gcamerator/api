@@ -57,6 +57,20 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
+// kora
+   router.get('/kora', async(req, res) => {
+	     try {
+	     var result = await kora()
+		res.json({
+			status: 200,
+			creator: `${creator}`,
+result
+	   })
+	    } catch(err) {
+		      console.log(err)
+		      res.json(loghandler.error)
+	       }
+     })
 // youtube
    router.get('/youtube', async(req, res) => {
 	     let url = req.query.url
