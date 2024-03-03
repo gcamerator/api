@@ -323,21 +323,13 @@ const result = await fbdown(url);
      router.get('/youtube', async(req, res) => {
 	     let url = req.query.url
 	     try {
-	     var mp3 = await ytMp3(url)
-	     var mp4 = await ytMp4(url)
-	if (!mp4 || !mp3) return res.json(loghandler.noturl)
+	     var result = await ytMp4(url)
+	if (!result) return res.json(loghandler.noturl)
 //	limitapikey(req.query.apikey)
 		res.json({
 			status: 200,
 			creator: `${creator}`,
-			result:{ 
-			title: mp4.title,
-			desc: mp4.desc,
-			thum: mp4.thumb,
-			channel: mp4.channel,
-			uploadDate: mp4.uploadDate,
-		        video: mp4.res,
-			audio: mp3.result,
+			result
 			}
 	   })
 	    } catch(err) {
