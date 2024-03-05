@@ -59,9 +59,9 @@ loghandler = {
 }
 // kora
    router.get('/kora', async(req, res) => {
-	   let day = req.query.day
+//	   let day = req.query.day
 	     try {
-	     const result = await kora(day)
+	     const result = await kora()
 		res.json({
 			status: 200,
 			creator: `${creator}`,
