@@ -6,7 +6,6 @@ let zahirr = db.get("zahirr");
 } catch (e) {
 	console.log('')  
 }
-const kora = require('../lib/api/kora')
 const { ytMp4, ytMp3 } = require('../lib/y2mate')
 const { openai } = require("../lib/openai.js")
 const { toanime, tozombie } = require("../lib/turnimg.js")
@@ -24,7 +23,7 @@ let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let nana = new NanaAPI()
 let { tiktok, pinterest, mediafireDl, pinterestdl } = require('../lib/index') 
-let {markoub, hespress, hiba, rhiba, fbdown, dtalamidi, talamidi, rhespress, salat, igdl, musically} = require('../lib/api/apidl')
+let {markoub, hespress, hiba, rhiba, fbdown, dtalamidi, talamidi, rhespress, salat, igdl, musically, kora} = require('../lib/api/apidl')
 let options = require(__path + '/lib/options.js');
 let { color, bgcolor } = require(__path + '/lib/color.js');
 let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
@@ -60,8 +59,9 @@ loghandler = {
 }
 // kora
    router.get('/kora', async(req, res) => {
+	   let day = req.query.day
 	     try {
-	     var result = await kora()
+	     var result = await kora(day)
 		res.json({
 			status: 200,
 			creator: `${creator}`,
