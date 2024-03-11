@@ -16,6 +16,7 @@ let mmk = ["MidSoune"]
 let creator = mmk[Math.floor(Math.random() * mmk.length)]
 let axios = require('axios')
 let fs = require('fs')
+const { OpenAI } = require('openai');
 let fetch = require('node-fetch');
 let router  = express.Router();
 let hxz = require('hxz-api')
@@ -91,6 +92,32 @@ result
 		      res.json(loghandler.error)
 	       }
      })
+//
+router.get('/openai', async (req, res, next) => {
+       	var text = req.query.text
+        if(!text) return res.json({ status : false, creator : `${creator}`, message : "Example : make me a roblox script that can make me fly"})
+try {
+const configuration = new Configuration({
+apiKey: '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',
+});
+const newopenai = new OpenAIApi(configuration);
+const response = await newopenai.createCompletion({
+model: "text-davinci-003",
+prompt: text,
+temperature: 0.3,
+ max_tokens: 3000,
+top_p: 1.0,
+frequency_penalty: 0.0,
+presence_penalty: 0.0,
+});
+res.json({ status : true, creator : `${creator}`, message : `Questions: ${text} \n\nAnswers: ${response.data.choices[0].text}\n\n`})
+} catch (err) {
+res.json({ status : false, creator : `${creator}`, message : 'Sorry, looks like something went wrong?'})
+} else {
+  res.json(loghandler.err)
+}
+})
+
 // cook
 router.get('/cook', async (req, res) => {
   const q = req.query.q;
