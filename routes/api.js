@@ -7,7 +7,7 @@ let zahirr = db.get("zahirr");
 	console.log('')  
 }
 const { ytMp4, ytMp3 } = require('../lib/y2mate')
-const { openai } = require("../lib/openai.js")
+// const { openai } = require("../lib/openai.js")
 const { toanime, tozombie } = require("../lib/turnimg.js")
 //const sanz = require("../lib/sanzyy-api")
 const sanzyy = require('sanzyy-api')
@@ -16,7 +16,7 @@ let mmk = ["MidSoune"]
 let creator = mmk[Math.floor(Math.random() * mmk.length)]
 let axios = require('axios')
 let fs = require('fs')
-const { OpenAI } = require('openai');
+const { Configuration, OpenAIApi, openai } = require("openai")
 let fetch = require('node-fetch');
 let router  = express.Router();
 let hxz = require('hxz-api')
@@ -110,11 +110,10 @@ top_p: 1.0,
 frequency_penalty: 0.0,
 presence_penalty: 0.0,
 });
-res.json({ status : true, creator : `${creator}`, message : `Questions: ${text} \n\nAnswers: ${response.data.choices[0].text}\n\n`})
+
+res.json({ status : true, creator : `${creator}`, message : `Request: ${text} \n\nHere We Go! : ${response.data.data[0].url}\n\n`})
 } catch (err) {
 res.json({ status : false, creator : `${creator}`, message : 'Sorry, looks like something went wrong?'})
-} else {
-  res.json(loghandler.err)
 }
 })
 
