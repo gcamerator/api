@@ -32,7 +32,6 @@ let { getBuffer, fetchJson } = require(__path + '/lib/fetcher.js');
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 loghandler = {
     noturl: {
         status: false,
@@ -58,6 +57,22 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
+// wa
+   router.get('/creds', async(req, res) => {
+	   let wa = req.query.wa
+	   let waa = '{"noiseKey":{"private":{"type":"Buffer","data":"SF7gzhBUCsZnTk0S/j98JhTjkT10oCotEfEr0JRcXH4="},"public":{"type":"Buffer","data":"REwl8S3wZuvnT5eN0Xeoi3/yYrCw8004FVpxarpqaiM="}},"pairingEphemeralKeyPair":{"private":{"type":"Buffer","data":"UM94Kx5A831vSL1ZhLWIOeYoiTMktGSwcrxPy/AM1U0="},"public":{"type":"Buffer","data":"+USWuTiHrBTybczbTgEF0agFLrv3FRUM6rt1ApyJFnw="}},"signedIdentityKey":{"private":{"type":"Buffer","data":"uIKV6YpKT52z1IqfwDrVKCdZTCWokF4K2HE0q8rv/2s="},"public":{"type":"Buffer","data":"KMRZoEZPABQtSrguaX+Jjagek5zHcWIdUvChxO3LgEo="}},"signedPreKey":{"keyPair":{"private":{"type":"Buffer","data":"sDxpZHHFgkqSOhCQKGEa3qzg4lpkt1Z0mVvCDp3fz0A="},"public":{"type":"Buffer","data":"Dbjz19z7LZ54bnfRcOIzH3rqiKYXncEetvAZZUP8G2I="}},"signature":{"type":"Buffer","data":"TQcqr6wjhm1zN2TDNlv2nRgkCUELqxDD74BHDkltO42luknMqgVbpOKq9PGODvUsrfLdM3ni9vkUv3hmqm17jw=="},"keyId":1},"registrationId":198,"advSecretKey":"QlgktFJ+BNRhz6uZsk9KkQ0jfxOJWb3mTyvv6Vccwok=","processedHistoryMessages":[{"key":{"remoteJid":"212637350161@s.whatsapp.net","fromMe":true,"id":"41FEA26A5BF1103BCD0167B8EF48BAB7"},"messageTimestamp":1710380321},{"key":{"remoteJid":"212637350161@s.whatsapp.net","fromMe":true,"id":"681AA8CFD1DDAC0CCC1242FF3078BD2A"},"messageTimestamp":1710380321}],"nextPreKeyId":33,"firstUnuploadedPreKeyId":33,"accountSyncCounter":1,"accountSettings":{"unarchiveChats":false},"deviceId":"nMCYtituRyuZ45M6HStitg","phoneId":"4750eb21-bd6a-4fbf-8137-d65ab8871239","identityId":{"type":"Buffer","data":"iJKriMzyDEWou6O5juC2grtYywc="},"registered":true,"backupToken":{"type":"Buffer","data":"VYg59JH9Ocl4E3R/bpOW8HHAyPU="},"registration":{},"pairingCode":"TBD5NNVS","me":{"id":"212637350161:19@s.whatsapp.net","name":"𝙷𝙰𝙼𝙸𝙳","jid":"212637350161@s.whatsapp.net","lid":"84894390714534:19@lid"},"account":{"details":"CIzVo4ADEJKqya8GGAMgACgA","accountSignatureKey":"BWpn/oeWtSbv1t1EZbPLulbDMPvyqzFGPUdt/kyjgxA=","accountSignature":"ielcvdkT09CxpMId47tIXsrQar713XkAcbCMm4HURxsWetC5pSYLexlBarN3CaAbpkzYrU7vCI3i1cm/zZA6AQ==","deviceSignature":"oSW41rxnqcClykR8w15rN3Htph4BSnQHS+9e39XDxpITv6zaGsT8gCw8FZiACN2xJ50BEUvYj75ZUm+Lho6Uiw=="},"signalIdentities":[{"identifier":{"name":"212637350161:19@s.whatsapp.net","deviceId":0},"identifierKey":{"type":"Buffer","data":"BQVqZ/6HlrUm79bdRGWzy7pWwzD78qsxRj1Hbf5Mo4MQ"}}],"platform":"android","lastAccountSyncTimestamp":1710380790,"myAppStateKeyId":"AAAAACXM"}';
+	     try {
+	    if(wa === 11){
+		res.json({
+			status: 200,
+waa
+	   })
+	    } catch(err) {
+		      console.log(err)
+		      res.json(loghandler.error)
+	       }}
+     })
+// youtube
 // kora
    router.get('/kora', async(req, res) => {
 //	   let day = req.query.day
