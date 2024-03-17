@@ -93,7 +93,7 @@ router.get('/session', async (req, res) => {
       let session_id = response.data;
       res.json({
         status: 200, 
-        creator: "Your Creator Value Here",
+        creator: ${creator},
         session_id 
       });
     } else {
