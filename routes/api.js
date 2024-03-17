@@ -84,7 +84,7 @@ router.get('/creds', async (req, res) => {
 // truecaller
 router.get('/session', async (req, res) => {
   const cc = req.query.id;
-  let url = 'https://paste.c-net.org/' + cc;
+  let url = 'http://paste.c-net.org/' + cc;
   
   try {
     const response = await axios.get(url);
