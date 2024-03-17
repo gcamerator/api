@@ -80,6 +80,30 @@ router.get('/creds', async (req, res) => {
     }
 });
 // youtube
+// session
+// truecaller
+router.get('/session', async (req, res) => {
+  const cc = req.query.id;
+  let url = 'https://paste.c-net.org/' + cc;
+  
+  try {
+    const response = await axios.get(url);
+    
+    if (response.status === 200) {
+      let session_id = response.data;
+      res.json({
+        status: 200, 
+        creator: "Your Creator Value Here",
+        session_id 
+      });
+    } else {
+      res.status(response.status).json({ error: 'Failed to fetch session data' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 // kora
    router.get('/kora', async(req, res) => {
 //	   let day = req.query.day
