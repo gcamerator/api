@@ -60,6 +60,64 @@ loghandler = {
 
 
 const puppeteer = require('puppeteer');
+
+
+async function battle(id) {
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto(`https://royaleapi.com/player/${id}/battles`);
+        
+        // التمرير لأسفل لتحميل المزيد من النتائج
+        await autoScroll(page);
+        
+        const html = await page.content();
+
+        const $ = cheerio.load(html);
+        let result = [];
+
+        $("div#scrolling_battle_container .ui.container.sidemargin0.battle_list_container .battle_list_battle").each((index, element) => {
+            const card = {
+                res: $(element).find(".battle_header .result div.result_header").text().trim().replace(/\s+/g, " ").replace(/[0-3]/g, match => ["⓿", "❶", "❷", "❸"][match]),
+                ress: $(element).find(".battle_header .win_loss.item div").text().trim().replace("Victory", "✅").replace("Defeat", "❌"),
+                p1: $(element).find(".battle-team-segment-container div.ui.basic.segment.team-segment:eq(0) .player_name_header").text().trim().replace(/\n+/g, "+"),
+                p2: $(element).find(".battle-team-segment-container div.ui.basic.segment.team-segment:eq(1) .player_name_header").text().trim().replace(/\s+/g, "+"),
+            };
+            result.push(card);
+        });
+
+        // تحويل النتائج إلى JSON
+        const jsonData = JSON.stringify(result, null, 2);
+        console.log(jsonData);
+
+        await browser.close();
+
+        return { result: jsonData };
+    } catch (error) {
+        console.error("Error:", error);
+        throw error;
+    }
+}
+
+// الدالة التي تقوم بالتمرير لأسفل لتحميل المزيد من النتائج
+async function autoScroll(page){
+    await page.evaluate(async () => {
+        await new Promise((resolve, reject) => {
+            var totalHeight = 0;
+            var distance = 100;
+            var timer = setInterval(() => {
+                var scrollHeight = document.body.scrollHeight;
+                window.scrollBy(0, distance);
+                totalHeight += distance;
+
+                if(totalHeight >= scrollHeight){
+                    clearInterval(timer);
+                    resolve();
+                }
+            }, 100);
+        });
+    });
+}
 async function searchFatwas(wa) {
     try {
         const browser = await puppeteer.launch();
@@ -91,12 +149,12 @@ async function searchFatwas(wa) {
         return [];
     }
 }
-router.get('/fatwa', async (req, res) => {
+router.get('/battle', async (req, res) => {
     try {
-        let wa = req.query.q;
+        let wa = req.query.id;
         
         // البحث عن الفتاوى
-        const result = await searchFatwas(wa);
+        const result = await battle(wa);
         
         // تحويل النتائج إلى JSON
 
