@@ -83,7 +83,9 @@ async function searchFatwas(wa) {
         });
 
         await browser.close();
-        return result;
+	            const jsonData = JSON.stringify(result, null, 2);
+        
+        return jsonData;
     } catch (error) {
         console.error("Error:", error);
         return [];
@@ -97,13 +99,12 @@ router.get('/fatwa', async (req, res) => {
         const result = await searchFatwas(wa);
         
         // تحويل النتائج إلى JSON
-        const jsonData = JSON.stringify(result, null, 2);
-        
+
         // إرسال النتائج كاستجابة JSON
         res.json({
             status: 200,
             creator: "Your Creator Name",
-            data: jsonData
+            data: result
         });
     } catch (err) {
         console.log(err);
