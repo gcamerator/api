@@ -61,19 +61,8 @@ loghandler = {
 }
 async function battle(id) {
     try {
-  const browser = await puppeteer.launch({
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-  ],
-});
-        const page = await browser.newPage();
-        await page.goto(`https://royaleapi.com/player/${id}/battles`);
-
-        // التمرير لأسفل لتحميل المزيد من النتائج
-        await autoScroll(page);
-
-        const html = await page.content();
+        const response = await fetch(`https://royaleapi.com/player/${id}/battles`);
+        const html = await response.text();
 
         const $ = cheerio.load(html);
         let result = [];
@@ -90,35 +79,14 @@ async function battle(id) {
 
         // تحويل النتائج إلى JSON
         const jsonData = JSON.stringify(result, null, 2);
-        await browser.close();
+        console.log(jsonData);
 
-        return jsonData;
+        return { result: jsonData };
     } catch (error) {
         console.error("Error:", error);
         throw error;
     }
 }
-
-// الدالة التي تقوم بالتمرير لأسفل لتحميل المزيد من النتائج
-async function autoScroll(page) {
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-
-                if (totalHeight >= scrollHeight) {
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
-}
-
 router.get('/battle', async (req, res) => {
     try {
         let wa = req.query.id;
