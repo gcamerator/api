@@ -4,7 +4,8 @@
   "description": "My Rest Api",
   "main": "nodemon index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "heroku-postbuild": "mkdir ./.cache && mv /app/.cache/puppeteer ./.cache"
   },
   "repository": {
     "type": "git",
