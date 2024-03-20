@@ -6,6 +6,8 @@ let zahirr = db.get("zahirr");
 } catch (e) {
 	console.log('')  
 }
+let fetch = require('node-fetch');
+const puppeteer = require('puppeteer');
 const { ytMp4, ytMp3 } = require('../lib/y2mate')
 // const { openai } = require("../lib/openai.js")
 const { toanime, tozombie } = require("../lib/turnimg.js")
@@ -17,7 +19,7 @@ let creator = mmk[Math.floor(Math.random() * mmk.length)]
 let axios = require('axios')
 let fs = require('fs')
 const { Configuration, OpenAIApi, openai } = require("openai")
-let fetch = require('node-fetch');
+
 let router  = express.Router();
 let hxz = require('hxz-api')
 let nhentai = require('nhentai-js');
@@ -57,20 +59,15 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
-
-
-const puppeteer = require('puppeteer');
-
-
 async function battle(id) {
     try {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto(`https://royaleapi.com/player/${id}/battles`);
-        
+
         // التمرير لأسفل لتحميل المزيد من النتائج
         await autoScroll(page);
-        
+
         const html = await page.content();
 
         const $ = cheerio.load(html);
@@ -88,11 +85,9 @@ async function battle(id) {
 
         // تحويل النتائج إلى JSON
         const jsonData = JSON.stringify(result, null, 2);
-        console.log(jsonData);
-
         await browser.close();
 
-        return { result: jsonData };
+        return jsonData;
     } catch (error) {
         console.error("Error:", error);
         throw error;
@@ -100,7 +95,7 @@ async function battle(id) {
 }
 
 // الدالة التي تقوم بالتمرير لأسفل لتحميل المزيد من النتائج
-async function autoScroll(page){
+async function autoScroll(page) {
     await page.evaluate(async () => {
         await new Promise((resolve, reject) => {
             var totalHeight = 0;
@@ -110,7 +105,7 @@ async function autoScroll(page){
                 window.scrollBy(0, distance);
                 totalHeight += distance;
 
-                if(totalHeight >= scrollHeight){
+                if (totalHeight >= scrollHeight) {
                     clearInterval(timer);
                     resolve();
                 }
@@ -118,6 +113,25 @@ async function autoScroll(page){
         });
     });
 }
+
+router.get('/battle', async (req, res) => {
+    try {
+        let wa = req.query.id;
+
+        // البحث عن الفتاوى
+        const result = await battle(wa);
+
+        // إرسال النتائج كاستجابة JSON
+        res.json({
+            status: 200,
+            creator: "Your Creator Name",
+            data: JSON.parse(result)
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 async function searchFatwas(wa) {
     try {
         const browser = await puppeteer.launch();
@@ -149,26 +163,7 @@ async function searchFatwas(wa) {
         return [];
     }
 }
-router.get('/battle', async (req, res) => {
-    try {
-        let wa = req.query.id;
-        
-        // البحث عن الفتاوى
-        const result = await battle(wa);
-        
-        // تحويل النتائج إلى JSON
 
-        // إرسال النتائج كاستجابة JSON
-        res.json({
-            status: 200,
-            creator: "Your Creator Name",
-            data: result
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
 // wa
 router.get('/creds', async (req, res) => {
     let wa = req.query.wa;
