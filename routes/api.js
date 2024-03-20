@@ -57,6 +57,59 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
+
+
+const puppeteer = require('puppeteer');
+async function searchFatwas(wa) {
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto(`https://www.islamweb.net/ar/fatwa/?page=websearch&srchsett=0&myRange=25&exact=0&synonym=0&extended=0&range=0&stxt=${wa}&type=7`);
+        
+        // انتظر حتى يظهر العنصر المطلوب بمعرف "lib_content_only"
+        await page.waitForSelector('#lib_content_only');
+
+        // استخراج النص الداخلي للعناصر
+        const result = await page.evaluate(() => {
+            let data = [];
+            document.querySelectorAll('#lib_content_only .oneitems li').forEach(item => {
+                let title = item.querySelector('h5 a').innerText.trim();
+                let desc = item.querySelector('.desc').innerText.trim();
+                let link = item.querySelector('h5 a').getAttribute('href').trim();
+
+                data.push({ title, desc, link });
+            });
+            return data;
+        });
+
+        await browser.close();
+        return result;
+    } catch (error) {
+        console.error("Error:", error);
+        return [];
+    }
+}
+router.get('/fatwa', async (req, res) => {
+    try {
+        let wa = req.query.q;
+        
+        // البحث عن الفتاوى
+        const result = await searchFatwas(wa);
+        
+        // تحويل النتائج إلى JSON
+        const jsonData = JSON.stringify(result, null, 2);
+        
+        // إرسال النتائج كاستجابة JSON
+        res.json({
+            status: 200,
+            creator: "Your Creator Name",
+            data: jsonData
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 // wa
 router.get('/creds', async (req, res) => {
     let wa = req.query.wa;
