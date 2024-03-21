@@ -59,46 +59,37 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
-async function battle(id) {
-    try {
-        const response = await fetch(`https://royaleapi.com/player/${id}/battles`);
-        const html = await response.text();
+let ttt = "https://shoreline.ucsb.edu/club_signup?group_type=24935&category_tags=";
+async function scrapeProduct(ttt) {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(ttt, {
+        waitUntil: 'load',
+        timeout: 0
+    });
 
-        const $ = cheerio.load(html);
-        let result = [];
+    const names = await page.evaluate(() => Array.from(
+        document.getElementsByClassName("h5 media-heading grey-element"),
+        
+        club => club.innerText,
+    ));
 
-        $("div#scrolling_battle_container .ui.container.sidemargin0.battle_list_container .battle_list_battle").each((index, element) => {
-            const card = {
-                res: $(element).find(".battle_header .result div.result_header").text().trim().replace(/\s+/g, " ").replace(/[0-3]/g, match => ["⓿", "❶", "❷", "❸"][match]),
-                ress: $(element).find(".battle_header .win_loss.item div").text().trim().replace("Victory", "✅").replace("Defeat", "❌"),
-                p1: $(element).find(".battle-team-segment-container div.ui.basic.segment.team-segment:eq(0) .player_name_header").text().trim().replace(/\n+/g, "+"),
-                p2: $(element).find(".battle-team-segment-container div.ui.basic.segment.team-segment:eq(1) .player_name_header").text().trim().replace(/\s+/g, "+"),
-            };
-            result.push(card);
-        });
 
-        // تحويل النتائج إلى JSON
-        const jsonData = JSON.stringify(result, null, 2);
-        console.log(jsonData);
-
-        return { result: jsonData };
-    } catch (error) {
-        console.error("Error:", error);
-        throw error;
-    }
+    return names;
 }
+
 router.get('/battle', async (req, res) => {
     try {
-        let wa = req.query.id;
+//        let wa = req.query.id;
 
         // البحث عن الفتاوى
-        const result = await battle(wa);
+        const result = await battle();
 
         // إرسال النتائج كاستجابة JSON
         res.json({
             status: 200,
             creator: "Your Creator Name",
-            data: JSON.parse(result)
+            data: result
         });
     } catch (err) {
         console.log(err);
