@@ -59,8 +59,9 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
+async function scrapeProduct() {
+	
 let ttt = "https://shoreline.ucsb.edu/club_signup?group_type=24935&category_tags=";
-async function scrapeProduct(ttt) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(ttt, {
@@ -83,7 +84,7 @@ router.get('/battle', async (req, res) => {
 //        let wa = req.query.id;
 
         // البحث عن الفتاوى
-        const result = await battle();
+        const result = await scrapeProduct();
 
         // إرسال النتائج كاستجابة JSON
         res.json({
