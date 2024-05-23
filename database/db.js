@@ -5,7 +5,7 @@ monk = require('monk'),
 // Connection URL
 let url = 'mongodb+srv://midsoune97:ouahs97soune@cluster0.wmsfy2h.mongodb.net/?retryWrites=true&w=majority';
 try {
-if(url == 'https://midsoune-b5be75a7ee15.herokuapp.com') throw console.log(color('Check the database configuration, the url var has not been filled in','red'));
+if(url == 'https://midsouneapi-fee7b0be8faf.herokuapp.com') throw console.log(color('Check the database configuration, the url var has not been filled in','red'));
 } catch (e) {
 return;
 }
