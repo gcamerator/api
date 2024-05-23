@@ -133,7 +133,7 @@ router.get('/moutamadris', (req, res) => {
   const moutamadris = new Moutamadris();
   try {
     const result = moutamadris.Start();
-    let data = {};
+    let data = [];
     data = result;
     fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
     res.json({
@@ -148,14 +148,17 @@ router.get('/moutamadris', (req, res) => {
 });
 router.get('/moutamadris/choice/', (req, res) => {
 	  const ch = req.query.num;
-	  const step = req.query.step
-	  const moutamadris =  new Moutamadris();
+	  const step = req.quer.step
   try {
     const result = moutamadris.Choice(ch, step);
+    let data = [];
+    data = result;
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
     res.json({
       status: 200,
       creator: creator,
-      result: result
+      result: result,
+      db: moutamadris
     });
   } catch (err) {
     console.log(err);
