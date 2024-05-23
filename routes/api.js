@@ -1,6 +1,6 @@
 __path = process.cwd()
 let express = require('express');
-let db = require(__path + '/database/db');
+let db = require(__path + '/database/db.js');
 try {
 let zahirr = db.get("zahirr");
 } catch (e) {
@@ -148,12 +148,7 @@ router.get('/moutamadris', (req, res) => {
 });
 router.get('/moutamadris/choice/', (req, res) => {
 	  const num = req.query.num;
-    if (fs.existsSync(dbPath)) {
-      const rawData = fs.readFileSync(dbPath);
-      rt = JSON.parse(rawData);
-    }
-	  const moutamadris = rt || new Moutamadris();
-      // moutamadris = JSON.parse(rawData);
+	  const moutamadris =  new Moutamadris();
   try {
     const result = moutamadris.Choice(num);
     res.json({
