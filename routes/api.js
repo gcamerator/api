@@ -151,9 +151,13 @@ router.get('/moutamadris', (req, res) => {
   }
 });
 router.get('/moutamadris', (req, res) => {
-  const moutamadris = new Moutamadris();
+	  const num = req.query.num;
+	// const moutamadris;
+ //      const rawData = fs.readFileSync(dbPath);
+	  const moutamadris = new Moutamadris();
+      // moutamadris = JSON.parse(rawData);
   try {
-    const result = moutamadris.Start();
+    const result = moutamadris.Choice(num);
     res.json({
       status: 200,
       creator: creator,
