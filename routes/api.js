@@ -147,10 +147,11 @@ router.get('/moutamadris', (req, res) => {
   }
 });
 router.get('/moutamadris/choice/', (req, res) => {
-	  const num = req.query.num;
+	  const ch = req.query.num;
+	  const step = req.quer.step
 	  const moutamadris =  new Moutamadris();
   try {
-    const result = moutamadris.Choice(num);
+    const result = moutamadris.Choice(ch, step);
     res.json({
       status: 200,
       creator: creator,
