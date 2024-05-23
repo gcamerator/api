@@ -134,11 +134,7 @@ router.get('/moutamadris', (req, res) => {
   try {
     const result = moutamadris.Start();
     let data = {};
-    if (fs.existsSync(dbPath)) {
-      const rawData = fs.readFileSync(dbPath);
-      data = JSON.parse(rawData);
-    }
-    data.moutamadris = result;
+    data = result;
     fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
     res.json({
       status: 200,
@@ -150,11 +146,13 @@ router.get('/moutamadris', (req, res) => {
     res.json({ status: 500, message: 'Internal Server Error' });
   }
 });
-router.get('/moutamadris', (req, res) => {
+router.get('/moutamadris/choice/', (req, res) => {
 	  const num = req.query.num;
-	// const moutamadris;
- //      const rawData = fs.readFileSync(dbPath);
-	  const moutamadris = new Moutamadris();
+    if (fs.existsSync(dbPath)) {
+      const rawData = fs.readFileSync(dbPath);
+      rt = JSON.parse(rawData);
+    }
+	  const moutamadris = rt || new Moutamadris();
       // moutamadris = JSON.parse(rawData);
   try {
     const result = moutamadris.Choice(num);
