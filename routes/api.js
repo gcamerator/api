@@ -148,12 +148,9 @@ router.get('/moutamadris', (req, res) => {
 });
 router.get('/moutamadris/choice/', (req, res) => {
 	  const ch = req.query.num;
-	  const step = req.quer.step
+	  const step = req.query.step
   try {
     const result = moutamadris.Choice(ch, step);
-    let data = [];
-    data = result;
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
     res.json({
       status: 200,
       creator: creator,
