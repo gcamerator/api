@@ -25,6 +25,7 @@ let hxz = require('hxz-api')
 let nhentai = require('nhentai-js');
 let NanaAPI = require('nana-api')
 let nana = new NanaAPI()
+const path = require('path');
 let { tiktok, pinterest, mediafireDl, pinterestdl, kora } = require('../lib/index') 
 let {markoub, hespress, hiba, rhiba, fbdown, dtalamidi, talamidi, rhespress, salat, igdl, musically} = require('../lib/api/apidl')
 let options = require(__path + '/lib/options.js');
@@ -127,6 +128,28 @@ async function searchFatwas(wa) {
         return [];
     }
 }
+const dbPath = path.join(__dirname, '../database/db.json');
+router.get('/moutamadris', (req, res) => {
+  const moutamadris = new Moutamadris();
+  try {
+    const result = moutamadris.Start();
+    let data = {};
+    if (fs.existsSync(dbPath)) {
+      const rawData = fs.readFileSync(dbPath);
+      data = JSON.parse(rawData);
+    }
+    data.moutamadris = result;
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+    res.json({
+      status: 200,
+      creator: creator,
+      result: result
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ status: 500, message: 'Internal Server Error' });
+  }
+});
 router.get('/moutamadris', (req, res) => {
   const moutamadris = new Moutamadris();
   try {
@@ -141,7 +164,6 @@ router.get('/moutamadris', (req, res) => {
     res.json({ status: 500, message: 'Internal Server Error' });
   }
 });
-
 // wa
 router.get('/creds', async (req, res) => {
     let wa = req.query.wa;
