@@ -19,7 +19,7 @@ let creator = mmk[Math.floor(Math.random() * mmk.length)]
 let axios = require('axios')
 let fs = require('fs')
 const { Configuration, OpenAIApi, openai } = require("openai")
-
+const Moutamadris = ('../lib/moutamadris.js')
 let router  = express.Router();
 let hxz = require('hxz-api')
 let nhentai = require('nhentai-js');
@@ -59,8 +59,7 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
-async function scrapeProduct() {
-	
+async function scrapeProduct() {	
 let ttt = "https://shoreline.ucsb.edu/club_signup?group_type=24935&category_tags=";
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -128,7 +127,21 @@ async function searchFatwas(wa) {
         return [];
     }
 }
-
+router.get('/motamadris', async (req, res) => {
+  const num = req.query.num;
+  const id = req.query.id;
+  try {
+    const result = await Moutamadris.start();
+     res.json({
+      status: 200, 
+      creator: `${creator}`,
+      result 
+    });
+  } catch(err) {
+    console.log(err);
+    res.json(loghandler.err)
+  }
+});
 // wa
 router.get('/creds', async (req, res) => {
     let wa = req.query.wa;
