@@ -127,9 +127,7 @@ async function searchFatwas(wa) {
         return [];
     }
 }
-router.get('/motamadris', async (req, res) => {
-  const num = req.query.num;
-  const id = req.query.id;
+router.get('/moutamadris', async (req, res) => {
   try {
     const result = await Moutamadris.start();
      res.json({
