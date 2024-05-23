@@ -148,7 +148,7 @@ router.get('/moutamadris', (req, res) => {
 });
 router.get('/moutamadris/choice/', (req, res) => {
 	  const ch = req.query.num;
-	  const step = req.quer.step
+	  const step = req.query.step
 	  const moutamadris =  new Moutamadris();
   try {
     const result = moutamadris.Choice(ch, step);
