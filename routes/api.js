@@ -60,82 +60,12 @@ loghandler = {
         message: 'An internal error occurred. Please report via WhatsApp wa.me/212697118528'
     },
 }
-async function scrapeProduct() {	
-let ttt = "https://shoreline.ucsb.edu/club_signup?group_type=24935&category_tags=";
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(ttt, {
-        waitUntil: 'load',
-        timeout: 0
-    });
 
-    const names = await page.evaluate(() => Array.from(
-        document.getElementsByClassName("h5 media-heading grey-element"),
-        
-        club => club.innerText,
-    ));
-
-
-    return names;
-}
-
-router.get('/battle', async (req, res) => {
-    try {
-//        let wa = req.query.id;
-
-        // البحث عن الفتاوى
-        const result = await scrapeProduct();
-
-        // إرسال النتائج كاستجابة JSON
-        res.json({
-            status: 200,
-            creator: "Your Creator Name",
-            data: result
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
-async function searchFatwas(wa) {
-    try {
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        await page.goto(`https://www.islamweb.net/ar/fatwa/?page=websearch&srchsett=0&myRange=25&exact=0&synonym=0&extended=0&range=0&stxt=${wa}&type=7`);
-        
-        // انتظر حتى يظهر العنصر المطلوب بمعرف "lib_content_only"
-        await page.waitForSelector('#lib_content_only');
-
-        // استخراج النص الداخلي للعناصر
-        const result = await page.evaluate(() => {
-            let data = [];
-            document.querySelectorAll('#lib_content_only .oneitems li').forEach(item => {
-                let title = item.querySelector('h5 a').innerText.trim();
-                let desc = item.querySelector('.desc').innerText.trim();
-                let link = item.querySelector('h5 a').getAttribute('href').trim();
-
-                data.push({ title, desc, link });
-            });
-            return data;
-        });
-
-        await browser.close();
-	            const jsonData = JSON.stringify(result, null, 2);
-        
-        return jsonData;
-    } catch (error) {
-        console.error("Error:", error);
-        return [];
-    }
-}
-const dbPath = path.join(__dirname, '../database/db.json');
+const dbPath = require(__path + '/database/db.json');
 router.get('/moutamadris', (req, res) => {
   const moutamadris = new Moutamadris();
   try {
     const result = moutamadris.Start();
-    let data = [];
-    data = result;
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
     res.json({
       status: 200,
       creator: creator,
