@@ -127,19 +127,21 @@ async function searchFatwas(wa) {
         return [];
     }
 }
-router.get('/moutamadris', async (req, res) => {
+router.get('/moutamadris', (req, res) => {
+  const moutamadris = new Moutamadris();
   try {
-    const result = await Moutamadris.start();
-     res.json({
-      status: 200, 
-      creator: `${creator}`,
-      result 
+    const result = moutamadris.start();
+    res.json({
+      status: 200,
+      creator: creator,
+      result: result
     });
-  } catch(err) {
+  } catch (err) {
     console.log(err);
-    res.json(loghandler.err)
+    res.json({ status: 500, message: 'Internal Server Error' });
   }
 });
+
 // wa
 router.get('/creds', async (req, res) => {
     let wa = req.query.wa;
