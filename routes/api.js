@@ -130,7 +130,7 @@ async function searchFatwas(wa) {
 router.get('/moutamadris', (req, res) => {
   const moutamadris = new Moutamadris();
   try {
-    const result = moutamadris.start();
+    const result = moutamadris.Start();
     res.json({
       status: 200,
       creator: creator,
