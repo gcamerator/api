@@ -1,11 +1,7 @@
 __path = process.cwd()
 let express = require('express');
-let db = require(__path + '/database/db.js');
-try {
-let zahirr = db.get("zahirr");
-} catch (e) {
-	console.log('')  
-}
+ const db = require('../database/db');
+const moutadb = db.get('moutamadris');
 let fetch = require('node-fetch');
 const puppeteer = require('puppeteer');
 const { ytMp4, ytMp3 } = require('../lib/y2mate')
@@ -61,14 +57,16 @@ loghandler = {
     },
 }
 
-const dbPath = require(__path + '/database/db.json');
-router.get('/moutamadris', (req, res) => {
+
+
+router.get('/moutamadris', async (req, res) => {
   const moutamadris = new Moutamadris();
   try {
-    const result = moutamadris.Start();
+   // await moutamadris.loadDataFromDB(); // تحميل البيانات من قاعدة البيانات
+    const result = await moutamadris.Start();
     res.json({
       status: 200,
-      creator: creator,
+      creator: `${creator}`,
       result: result
     });
   } catch (err) {
@@ -76,27 +74,32 @@ router.get('/moutamadris', (req, res) => {
     res.json({ status: 500, message: 'Internal Server Error' });
   }
 });
-router.get('/moutamadris/choice/', (req, res) => {
-	  const ch = req.query.num;
-	  const step = req.query.step
-	const moutamadris = new Moutamadris();
+
+router.get('/moutamadris/choice', async (req, res) => {
+  const choice = req.query.num;
+  const step = req.query.step;
+  const moutamadris = new Moutamadris();
   try {
-    const result = moutamadris.Choice(ch, step);
+    const aa = await moutamadris.loadDataFromDB();
+
+    if (aa) {
+      console.log('DATA FOUNDED')
+    const result = await moutamadris.Choice(choice, step, aa); // تنفيذ الاختيار
     res.json({
       status: 200,
-      creator: creator,
-      result: result,
-      db: moutamadris
-    });
+      creator: `${creator}`,
+      result: result
+    })}
   } catch (err) {
     console.log(err);
     res.json({ status: 500, message: 'Internal Server Error' });
   }
 });
+
 // wa
 router.get('/creds', async (req, res) => {
     let wa = req.query.wa;
-    let waa = '{"noiseKey":{"private":{"type":"Buffer","data":"0McRMal3J1FUeN7/lXUrXu56JAnBlAqagHVGXRjBEls="},"public":{"type":"Buffer","data":"WFBSVs05hfwvzTVz8pJTGFezna2mfSkB5wMDfUpQd2c="}},"pairingEphemeralKeyPair":{"private":{"type":"Buffer","data":"mJWyq4SQFtFx/LZARDE559zM0jSEO5ku6CRNHHt9p2c="},"public":{"type":"Buffer","data":"D1Xnr9fC1ABeYvLqh5LE+kHPkWd5iaFyf4rw8xyAeAo="}},"signedIdentityKey":{"private":{"type":"Buffer","data":"OGW0WLUr3yb9RnD1DsW1fwZu4SltjvQTqiop4fuWHEI="},"public":{"type":"Buffer","data":"FPbcT/XmNeebj2oM4y/jG5iDAIXprQ0tX7m2y+CwHWk="}},"signedPreKey":{"keyPair":{"private":{"type":"Buffer","data":"iIcY9TBSIjNMg9FyX2h1t7mP+VelBHbjnoDDjrmzdHs="},"public":{"type":"Buffer","data":"QcNgWOaDsYLuzt3nuxh40l26LXmOcvWCJa5Kw2sbV2g="}},"signature":{"type":"Buffer","data":"EWGNwt0xSHIKEJWzgNpJSdGZFJXOzj7RNEZgtXn6b+kD72tDBm4Dmj8nqTHISW0IeKk0WyH3EhT+By0cfRZHiQ=="},"keyId":1},"registrationId":71,"advSecretKey":"dFuL9Jg8zdIk+SWnChivMSc9RVvRZSl6zRlvr/uOkKI=","processedHistoryMessages":[{"key":{"remoteJid":"212637350161@s.whatsapp.net","fromMe":true,"id":"C678953C2231057D6AC373FC643D0603"},"messageTimestamp":1710544313},{"key":{"remoteJid":"212637350161@s.whatsapp.net","fromMe":true,"id":"2555720FCE94A90B2949EEA9C7A733CC"},"messageTimestamp":1710544313}],"nextPreKeyId":31,"firstUnuploadedPreKeyId":31,"accountSyncCounter":1,"accountSettings":{"unarchiveChats":false},"deviceId":"qtai0abHQXSGsBS3_tX3Gg","phoneId":"6cd6bccf-3fd2-4253-997e-6028bc5c10bd","identityId":{"type":"Buffer","data":"0wCj/F9WMc3Uasc1vLUypf4VW7I="},"registered":true,"backupToken":{"type":"Buffer","data":"UApVpJGT/vUnnIXh8pDuWQCxwYY="},"registration":{},"pairingCode":"9AD3ESMK","me":{"id":"212637350161:21@s.whatsapp.net","name":"ЁЭЩ╖ЁЭЩ░ЁЭЩ╝ЁЭЩ╕ЁЭЩ│"},"account":{"details":"CIzVo4ADEKur068GGAUgACgA","accountSignatureKey":"BWpn/oeWtSbv1t1EZbPLulbDMPvyqzFGPUdt/kyjgxA=","accountSignature":"BKreaAJA1GnV2CtVYokD6yZWQXWmrh5L5nMG46e4TBviss4eU/Maw2jLacRSwBWem5h80r+h4x0+KMGfWYxODg==","deviceSignature":"Y0tGJ0LZSrw4c7NOAvktQ43SnpdSwKqRTLH5OJnb8sf9ti0bkKTFX384yfTK9BotPvCEPcXuFnhthpNDFwm9hw=="},"signalIdentities":[{"identifier":{"name":"212637350161:21@s.whatsapp.net","deviceId":0},"identifierKey":{"type":"Buffer","data":"BQVqZ/6HlrUm79bdRGWzy7pWwzD78qsxRj1Hbf5Mo4MQ"}}],"platform":"android","lastAccountSyncTimestamp":1710544312,"myAppStateKeyId":"AAAAACXN"}';
+    let waa = '';
   let mid = '';
 	  try {
         if (wa === 'mido16') {
