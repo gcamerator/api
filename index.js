@@ -21,5 +21,4 @@ app.use('/api', apirouter)
 app.listen(PORT, host, () => {
     console.log(color("Server running on port " + PORT,'green'))
 })
-
 module.exports = app
