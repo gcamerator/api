@@ -60,10 +60,14 @@ loghandler = {
 
 
 router.get('/moutamadris', async (req, res) => {
+   const user = req.query.user;
   const moutamadris = new Moutamadris();
+  if (!user) {
+    res.status(404).json({ status: 404, message: 'User Required' });
+    return;}
   try {
    // await moutamadris.loadDataFromDB(); // تحميل البيانات من قاعدة البيانات
-    const result = await moutamadris.Start();
+    const result = await moutamadris.Start(user);
     res.json({
       status: 200,
       creator: `${creator}`,
@@ -76,24 +80,31 @@ router.get('/moutamadris', async (req, res) => {
 });
 
 router.get('/moutamadris/choice', async (req, res) => {
-  const choice = req.query.num;
-  const step = req.query.step;
-  const moutamadris = new Moutamadris();
-  try {
-    const aa = await moutamadris.loadDataFromDB();
+    const choice = req.query.num;
+    const step = req.query.step;
+    const user = req.query.user;
+    const moutamadris = new Moutamadris();
+    try {
+        const userData = await moutamadris.loadDataFromDB(user);
+  
+        if (!userData) {
+            res.status(404).json({ status: 404, message: 'User not found' });
+            return;
+        }
+      if (userData) {
 
-    if (aa) {
-      console.log('DATA FOUNDED')
-    const result = await moutamadris.Choice(choice, step, aa); // تنفيذ الاختيار
-    res.json({
-      status: 200,
-      creator: `${creator}`,
-      result: result
-    })}
-  } catch (err) {
-    console.log(err);
-    res.json({ status: 500, message: 'Internal Server Error' });
-  }
+        const result = await moutamadris.Choice(choice, step, userData);
+
+        res.json({
+            status: 200,
+            creator: `${creator}`,
+            result: result
+        });
+      }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ status: 500, message: 'Internal Server Error' });
+    }
 });
 
 // wa
